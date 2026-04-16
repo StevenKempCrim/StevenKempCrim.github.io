@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Steven Kemp — Criminologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1a2640; --ink: #2c2c2c; --muted: #5a6070;
+      --rule: #d4d8e0; --accent: #b5451b; --bg: #faf9f7;
+      --card: #ffffff; --serif: 'Lora', Georgia, serif;
+      --sans: 'Source Sans 3', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100; background: var(--navy);
+      padding: 0 2rem; display: flex; align-items: center;
+      justify-content: space-between; height: 58px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    }
+    .nav-brand { font-family: var(--serif); color: #fff; font-size: 1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75); text-decoration: none; font-size: .85rem;
+      letter-spacing: .04em; text-transform: uppercase; padding: 0 .9rem;
+      height: 58px; display: flex; align-items: center;
+      border-bottom: 3px solid transparent; transition: color .2s, border-color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; border-bottom-color: var(--accent); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+    /* HERO */
+    #home {
+      display: grid; grid-template-columns: 1fr 230px; gap: 3rem;
+      max-width: 900px; margin: 0 auto; padding: 5rem 2rem 4rem; align-items: start;
+    }
+    .hero-text h1 { font-family: var(--serif); font-size: 2.6rem; color: var(--navy); line-height: 1.2; margin-bottom: .4rem; }
+    .hero-text .title-line { font-size: .95rem; font-weight: 600; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-bottom: .2rem; }
+    .hero-text .affil-line { font-size: .88rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .hero-text p { color: var(--muted); font-size: .975rem; max-width: 500px; margin-bottom: .9rem; }
+    .hero-links { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .6rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .tag { font-size: .72rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: .2rem .65rem; background: rgba(26,38,64,.08); color: var(--navy); border-radius: 20px; }
+    .btn { display: inline-block; padding: .45rem 1.1rem; font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; border-radius: 3px; text-decoration: none; transition: background .2s, color .2s; }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-outline { border: 1.5px solid var(--navy); color: var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+    .photo-placeholder {
+      width: 200px; height: 245px;
+      background: linear-gradient(135deg, #d0d8e8 0%, #b8c4d8 100%);
+      border-radius: 4px; box-shadow: 6px 6px 0 var(--rule), 12px 12px 0 rgba(26,38,64,.08);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--navy); font-size: .8rem; text-align: center; margin: 0 auto;
+    }
+    .photo-placeholder svg { margin-bottom: .5rem; opacity: .5; }
+
+    /* SECTIONS */
+    section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    section + section { border-top: 1px solid var(--rule); }
+    .section-label {
+      font-family: var(--serif); font-size: 1.7rem; color: var(--navy);
+      margin-bottom: 2rem; padding-bottom: .6rem;
+      border-bottom: 3px solid var(--accent); display: inline-block;
+    }
+
+    /* RESEARCH — year-grouped layout */
+    .pub-year-group { margin-bottom: 2rem; }
+    .pub-year-group:last-child { margin-bottom: 0; }
+    .pub-year-heading {
+      font-family: var(--serif); font-size: 1.15rem; color: var(--navy);
+      font-weight: 600; margin-bottom: .85rem;
+      padding-bottom: .3rem; border-bottom: 2px solid var(--rule);
+    }
+    .pub-list { display: grid; gap: .85rem; }
+    .paper-card {
+      background: var(--card); border: 1px solid var(--rule);
+      border-left: 4px solid var(--navy); border-radius: 4px; padding: 1rem 1.25rem;
+      transition: border-left-color .2s, box-shadow .2s;
+    }
+    .paper-card:hover { border-left-color: var(--accent); box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+    .paper-card .pub-type {
+      display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; padding: .1rem .5rem; border-radius: 2px;
+      margin-bottom: .35rem;
+    }
+    .pub-type.article { background: rgba(26,38,64,.1); color: var(--navy); }
+    .pub-type.book { background: rgba(181,69,27,.12); color: var(--accent); }
+    .pub-type.chapter { background: rgba(45,110,62,.12); color: #2d6e3e; }
+    .pub-type.report { background: rgba(90,96,112,.12); color: var(--muted); }
+    .pub-type.editorial { background: rgba(45,110,62,.12); color: #2d6e3e; }
+    .paper-card h3 { font-family: var(--serif); font-size: .975rem; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: .25rem; }
+    .paper-card .journal { font-style: italic; font-size: .855rem; color: var(--muted); margin-bottom: .5rem; }
+    .paper-card a.paper-link { font-size: .75rem; font-weight: 600; color: var(--accent); text-decoration: none; letter-spacing: .04em; text-transform: uppercase; }
+    .paper-card a.paper-link:hover { text-decoration: underline; }
+
+    /* MEDIA */
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .media-card {
+      background: var(--card); border: 1px solid var(--rule); border-radius: 4px;
+      padding: 1.25rem 1.4rem; text-decoration: none; display: block;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .media-card:hover { box-shadow: 0 2px 14px rgba(0,0,0,.09); border-color: #b8c0cc; }
+    .media-card .media-meta { display: flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
+    .outlet-badge { background: var(--navy); color: #fff; padding: .15rem .55rem; border-radius: 2px; font-size: .7rem; letter-spacing: .05em; }
+    .outlet-badge.tv { background: #7b2d8b; }
+    .outlet-badge.cat { background: #2d6e3e; }
+    .media-card h3 { font-family: var(--serif); font-size: .98rem; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: .35rem; }
+    .media-card p { font-size: .85rem; color: var(--muted); line-height: 1.55; }
+    .media-card .arrow { display: inline-block; margin-top: .7rem; font-size: .75rem; font-weight: 600; color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .contact-block p { font-size: .95rem; color: var(--muted); margin-bottom: 1rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .9rem; }
+    .contact-item .icon { width: 32px; height: 32px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-item .icon svg { fill: #fff; }
+    .contact-item .label { font-size: .75rem; font-weight: 600; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+    .contact-item .value { font-size: .92rem; color: var(--ink); }
+    .contact-item a { color: var(--navy); text-decoration: none; }
+    .contact-item a:hover { color: var(--accent); }
+    .social-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .9rem; border: 1.5px solid var(--rule); border-radius: 3px; font-size: .8rem; font-weight: 600; color: var(--navy); text-decoration: none; transition: border-color .2s, background .2s, color .2s; }
+    .social-btn:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
+    .cv-list { list-style: none; display: grid; gap: .6rem; }
+    .cv-list li { display: grid; grid-template-columns: 110px 1fr; gap: .75rem; font-size: .9rem; padding-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+    .cv-list li:last-child { border-bottom: none; }
+    .cv-list .cv-years { color: var(--accent); font-weight: 600; font-size: .8rem; padding-top: 2px; }
+    .cv-list .cv-role { color: var(--ink); }
+    .cv-list .cv-org { color: var(--muted); font-size: .85rem; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,.5); text-align: center; padding: 1.5rem; font-size: .8rem; }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+
+    /* MOBILE */
+    @media (max-width: 680px) {
+      #home { grid-template-columns: 1fr; text-align: center; padding-top: 3rem; }
+      .hero-photo { order: -1; }
+      .hero-links, .tags { justify-content: center; }
+      .hero-text p { margin-left: auto; margin-right: auto; }
+      .contact-grid, .media-grid { grid-template-columns: 1fr; }
+      .cv-list li { grid-template-columns: 1fr; gap: .15rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--navy); padding: .5rem 0; box-shadow: 0 4px 8px rgba(0,0,0,.3); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: auto; padding: .8rem 2rem; border-bottom: none; border-left: 3px solid transparent; }
+      .nav-links a:hover { border-left-color: var(--accent); }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-brand">Steven Kemp</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#media">In the Media</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="hero-text">
+    <h1>Steven Kemp</h1>
+    <div class="title-line">Serra Hunter Associate Professor of Criminology</div>
+    <div class="affil-line">Universitat de Girona &nbsp;·&nbsp; Dret Públic &nbsp;·&nbsp; ORCID: <a href="https://orcid.org/0000-0001-8662-1913" target="_blank" style="color:var(--muted)">0000-0001-8662-1913</a></div>
+    <div class="tags">
+      <span class="tag">Fraud</span>
+      <span class="tag">Cybercrime</span>
+      <span class="tag">Sentencing</span>
+      <span class="tag">Quantitative methods</span>
+    </div>
+    <p>I am a Serra Hunter Associate Professor of Criminology in the Department of Public Law at the Universitat de Girona, and a member of the <a href="https://www.udg.edu/scpic" target="_blank" style="color:var(--ink)">Seminari de Ciències Penals i Criminològiques</a> research group. My research focuses on fraud and cybercrime against individuals and organisations, sentencing, and quantitative methods — with a particular emphasis on the Spanish and European criminal justice context.</p>
+    <p>I also serve as a Consultant Lecturer at the United Nations Interregional Crime and Justice Research Institute (UNICRI) and at the Universitat Oberta de Catalunya (UOC).</p>
+    <div class="hero-links">
+      <a href="#research" class="btn btn-primary">View Research</a>
+      <a href="https://scholar.google.com/citations?user=uT_G5foAAAAJ" target="_blank" class="btn btn-outline">Google Scholar</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <!-- Replace this with your photo:
+    <img src="photo.jpg" alt="Steven Kemp" style="width:200px;height:245px;object-fit:cover;border-radius:4px;box-shadow:6px 6px 0 #d4d8e0,12px 12px 0 rgba(26,38,64,.08);display:block;margin:0 auto;"> -->
+    <div class="photo-placeholder">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="#1a2640"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      Your photo here
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <h2 class="section-label">Research</h2>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2026</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Managing Cybersecurity in the Water Sector: When the Human Factor Does Matter</h3>
+        <div class="journal"><em>Journal of Water Resources Planning and Management</em>, 152(5), 05026009 (with Laura Arantegui &amp; Ignasi Rodriguez-Roda)</div>
+        <a href="https://doi.org/10.1061/JWRMD5.WRENG-7075" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Financially Motivated Cybercrime Offending in Video Game Environments: Self-Control, Risky Lifestyles and Victim-Offender Overlaps</h3>
+        <div class="journal"><em>Victims &amp; Offenders</em> (with Fernando Miró-Llinares)</div>
+        <a href="https://doi.org/10.1080/15564886.2026.2643285" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2025</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Worry about Online Fraud and Older Adults: Avoidant and Protective Responses</h3>
+        <div class="journal"><em>Journal of Criminology</em>, 58(3) (with Esther Sitges Maciá &amp; Nieves Erades-Pérez)</div>
+        <a href="https://doi.org/10.1177/26338076241293144" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+<div class="paper-card">
+  <span class="pub-type article">Journal article</span>
+  <h3>El misterioso caso de las cifras oficiales sobre condenas por delitos sexuales graves</h3>
+  <div class="journal"><em>Revista Española de Investigación Criminológica</em>, 23(1) (with Daniel Varona &amp; Jose M. López-Riba)</div>
+  <a href="https://reic.criminologia.net/index.php/journal/article/view/1019" target="_blank" class="paper-link">→ View paper</a>
+</div>
+      <div class="paper-card">
+        <span class="pub-type editorial">Editorial</span>
+        <h3>Editorial: Número especial TIC y criminalidad</h3>
+        <div class="journal"><em>Revista Española de Investigación Criminológica</em>, 22(2) (with Abel González)</div>
+        <a href="https://doi.org/10.46381/reic.v22i2.969" target="_blank" class="paper-link">→ View editorial</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type report">Research report</span>
+        <h3>Les Audiències Provincials Catalanes i les Ordres de Protecció en Violència Masclista</h3>
+        <div class="journal">Observatori de la Justícia, Departament de Justícia, Generalitat de Catalunya (Varona et al.)</div>
+        <a href="https://repositori.justicia.gencat.cat/bitstream/handle/20.500.14226/2862/Recerca_Observatori_AudienciesProvincialsCatalanesOrdresProteccioVM.pdf?sequence=1&isAllowed=y" target="_blank" class="paper-link">→ View report</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2024</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Is There a Penalty for Going to Trial in Spain? Plea Bargaining and Courtroom Efficiency</h3>
+        <div class="journal"><em>European Journal of Criminology</em>, 21(1), 92–115 (with Daniel Varona)</div>
+        <a href="https://doi.org/10.1177/14773708221117514" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type book">Book</span>
+        <h3>Las Ciberestafas: Tendencias, Infractores, Víctimas y Prevención</h3>
+        <div class="journal">Atelier Libros, Barcelona. ISBN: 9788410174054</div>
+        <a href="https://editorial.tirant.com/es/libro/las-ciberestafas-tendencias-infractores-victimas-y-prevencion-9788410174054" target="_blank" class="paper-link">→ View book</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2023</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Foreign and Dangerous? Unpacking the Role of Judges and Prosecutors in Sentencing Disparities in Spain</h3>
+        <div class="journal"><em>British Journal of Criminology</em>, 63(4), 984–1002 (with Daniel Varona)</div>
+        <a href="https://doi.org/10.1093/bjc/azac068" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Exploring Public Cybercrime Prevention Campaigns and Victimization of Businesses: A Bayesian Model Averaging Approach</h3>
+        <div class="journal"><em>Computers &amp; Security</em>, 127, 103089</div>
+        <a href="https://doi.org/10.1016/j.cose.2022.103089" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Consumer Fraud against Older Adults in Digital Society: Examining Victimization and Its Impact</h3>
+        <div class="journal"><em>International Journal of Environmental Research and Public Health</em>, 20(7) (with Nieves Erades-Pérez)</div>
+        <a href="https://doi.org/10.3390/ijerph20075404" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>The Digital Harms of Smart Home Devices: A Systematic Literature Review</h3>
+        <div class="journal"><em>Computers in Human Behavior</em>, 145, 107770 (with Buil-Gil, Kuenzel, Coventry, Zakhary, Tilley &amp; Nicholson)</div>
+        <a href="https://doi.org/10.1016/j.chb.2023.107770" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>When Do Businesses Report Cybercrime? Findings from a UK Study</h3>
+        <div class="journal"><em>Criminology and Criminal Justice</em>, 23(3), 468–489 (with Buil-Gil, Miró-Llinares &amp; Lord)</div>
+        <a href="https://doi.org/10.1177/17488958211062359" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2022</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>La conformidad en España: predictores e impacto en la penalidad</h3>
+        <div class="journal"><em>InDret: Revista para el Análisis del Derecho</em>, 1/2022 (with Daniel Varona &amp; Olivia Benítez)</div>
+        <a href="https://indret.com/la-conformidad-en-espana/?edicion=1.22" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2021</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Empty Streets, Busy Internet: A Time-Series Analysis of Cybercrime and Fraud Trends During COVID-19</h3>
+        <div class="journal"><em>Journal of Contemporary Criminal Justice</em>, 37(4), 480–501 (with Buil-Gil, Moneva, Miró-Llinares &amp; Díaz-Castaño)</div>
+        <a href="https://doi.org/10.1177/10439862211027986" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Offline Crime Bounces Back to Pre-COVID Levels, Cyber Stays High: Interrupted Time-Series Analysis in Northern Ireland</h3>
+        <div class="journal"><em>Crime Science</em>, 10(26) (with David Buil-Gil &amp; Yongyu Zeng)</div>
+        <a href="https://doi.org/10.1186/s40163-021-00162-9" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Cybercrime and Shifts in Opportunities During COVID-19: A Preliminary Analysis in the UK</h3>
+        <div class="journal"><em>European Societies</em>, 23(S1), 47–59 (with Buil-Gil, Miró-Llinares, Moneva &amp; Díaz-Castaño)</div>
+        <a href="https://doi.org/10.1080/14616696.2020.1804973" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-heading">2020</div>
+    <div class="pub-list">
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Fraud Reporting in Catalonia in the Internet Era: Determinants and Motives</h3>
+        <div class="journal"><em>European Journal of Criminology</em>, 19(5), 994–1015</div>
+        <a href="https://doi.org/10.1177/1477370820941405" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>The Dark Figure and the Cyber Fraud Rise in Europe: Evidence from Spain</h3>
+        <div class="journal"><em>European Journal on Criminal Policy and Research</em>, 26, 293–312 (with Miró-Llinares &amp; Moneva)</div>
+        <a href="https://doi.org/10.1007/s10610-020-09439-2" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Suspended Sentences in Spain: An Alternative to Prison or a "Bargaining Chip" in Plea Negotiations?</h3>
+        <div class="journal"><em>European Journal of Crime, Criminal Law and Criminal Justice</em>, 28(4) (with Daniel Varona)</div>
+        <a href="https://doi.org/10.1163/15718174-BJA10010" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>Fraude online vs. offline: Factores predictores de victimización y su impacto</h3>
+        <div class="journal"><em>InDret: Revista para el Análisis del Derecho</em>, 1/2020 (with Asier Moneva)</div>
+        <a href="https://indret.com/fraude-online-vsoffline-factores-predictores-de-victimizacion-y-su-impacto/" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- IN THE MEDIA -->
+<section id="media">
+  <h2 class="section-label">In the Media</h2>
+  <div class="media-grid">
+
+    <a href="https://elpais.com/espana/2026-04-11/la-fiscalia-apenas-registra-una-de-cada-cuatro-sentencias-por-violacion-en-sus-datos-oficiales.html" target="_blank" class="media-card">
+      <div class="media-meta"><span class="outlet-badge">El País</span><span>April 2026</span></div>
+      <h3>La fiscalía apenas registra una de cada cuatro sentencias por violación en sus datos oficiales</h3>
+      <p>Research on significant under-recording of rape convictions in Spain's official prosecutorial statistics, highlighting gaps in judicial data collection.</p>
+      <span class="arrow">→ Read article</span>
+    </a>
+
+    <a href="https://www.3cat.cat/3cat/lestafador-de-lamor/" target="_blank" class="media-card">
+      <div class="media-meta"><span class="outlet-badge tv">3Cat / TV3</span><span>October 2024</span></div>
+      <h3>L'estafador de l'amor — Documentary series (3 episodes)</h3>
+      <p>Expert contributor across all three episodes of this TV3 documentary series investigating the case of Albert Cavallé, a serial romance fraudster who exploited victims through dating apps.</p>
+      <span class="arrow">→ Watch series</span>
+    </a>
+
+    <a href="https://elpais.com/tecnologia/2024-03-10/las-ciberestafas-ya-son-el-segundo-delito-mas-denunciado-nadie-esta-a-salvo-de-caer-en-la-trampa.html" target="_blank" class="media-card">
+      <div class="media-meta"><span class="outlet-badge">El País</span><span>March 2024</span></div>
+      <h3>Las ciberestafas ya son el segundo delito más denunciado: "Nadie está a salvo de caer en la trampa"</h3>
+      <p>Commentary on the rise of online fraud to become Spain's second most-reported crime, and why no one is immune to falling victim.</p>
+      <span class="arrow">→ Read article</span>
+    </a>
+
+    <a href="https://www.diaripublic.cat/delinqueencia-canvia-d-escenari-i-desplaca-durant-l-epidemia.html" target="_blank" class="media-card">
+      <div class="media-meta"><span class="outlet-badge cat">Diari Públic</span><span>2021</span></div>
+      <h3>La delinqüència canvia d'escenari i es desplaça durant l'epidèmia</h3>
+      <p>Analysis of how crime patterns shifted during the COVID-19 pandemic, with street crime declining while cybercrime and online fraud surged.</p>
+      <span class="arrow">→ Read article</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-label">Contact</h2>
+  <div class="contact-grid">
+    <div class="contact-block">
+      <p>Feel free to get in touch regarding research collaborations, media enquiries, or dissertation supervision.</p>
+      <div class="contact-item">
+        <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+        <div>
+          <div class="label">Email</div>
+          <div class="value">steven.kemp [at] udg.edu</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <div>
+          <div class="label">Address</div>
+          <div class="value">Departament de Dret Públic<br>C/ de la Universitat de Girona, 12<br>17003 Girona, Spain</div>
+        </div>
+      </div>
+      <div class="social-row">
+        <a href="https://scholar.google.com/citations?user=uT_G5foAAAAJ" target="_blank" class="social-btn">Google Scholar</a>
+        <a href="https://orcid.org/0000-0001-8662-1913" target="_blank" class="social-btn">ORCID</a>
+        <a href="https://www.researchgate.net/profile/Steven-Kemp" target="_blank" class="social-btn">ResearchGate</a>
+        <a href="https://twitter.com/StvnKemp" target="_blank" class="social-btn">Twitter / X</a>
+        <a href="https://www.linkedin.com/in/steven-kemp-ed/" target="_blank" class="social-btn">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="contact-block">
+      <p style="font-weight:600;color:var(--navy);margin-bottom:.75rem;">Academic positions</p>
+      <ul class="cv-list">
+        <li><span class="cv-years">2025–present</span><div><div class="cv-role">Serra Hunter Associate Professor</div><div class="cv-org">Universitat de Girona</div></div></li>
+        <li><span class="cv-years">2024–present</span><div><div class="cv-role">Consultant Lecturer — Economy of Cybercrime</div><div class="cv-org">UNICRI (United Nations)</div></div></li>
+        <li><span class="cv-years">2023–2025</span><div><div class="cv-role">Serra Hunter Lecturer</div><div class="cv-org">Universitat de Girona</div></div></li>
+        <li><span class="cv-years">2021–2023</span><div><div class="cv-role">Postdoctoral Researcher (Juan de la Cierva)</div><div class="cv-org">Universitat Pompeu Fabra</div></div></li>
+        <li><span class="cv-years">2021</span><div><div class="cv-role">Postdoctoral Researcher</div><div class="cv-org">University of Manchester</div></div></li>
+        <li><span class="cv-years">2018–present</span><div><div class="cv-role">Consultant Lecturer</div><div class="cv-org">Universitat Oberta de Catalunya (UOC)</div></div></li>
+        <li><span class="cv-years">2018–2025</span><div><div class="cv-role">Police Officer Trainer</div><div class="cv-org">Catalan Institute for Public Security (ISPC)</div></div></li>
+        <li><span class="cv-years">2020–2021</span><div><div class="cv-role">Assistant Lecturer</div><div class="cv-org">Universidad Miguel Hernández de Elche</div></div></li>
+        <li><span class="cv-years">2015–2021</span><div><div class="cv-role">Assistant Lecturer</div><div class="cv-org">Universitat de Girona</div></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Steven Kemp · steven.kemp [at] udg.edu · Universitat de Girona</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  });
+  navLinks.forEach(a => a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  }));
+</script>
+</body>
+</html>
