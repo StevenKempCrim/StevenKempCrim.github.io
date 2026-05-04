@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- GoatCounter analytics: free, GDPR-friendly, no cookies, no personal data collected -->
+  <!-- Replace 'YOURCODE' below with your GoatCounter site code after signing up at https://www.goatcounter.com -->
+  <script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -119,7 +122,6 @@
     .media-card .arrow { display: inline-block; margin-top: .7rem; font-size: .75rem; font-weight: 600; color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
 
     /* CONTACT */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
     .contact-block p { font-size: .95rem; color: var(--muted); margin-bottom: 1rem; }
     .contact-item { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .9rem; }
     .contact-item .icon { width: 32px; height: 32px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -131,12 +133,6 @@
     .social-row { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
     .social-btn { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .9rem; border: 1.5px solid var(--rule); border-radius: 3px; font-size: .8rem; font-weight: 600; color: var(--navy); text-decoration: none; transition: border-color .2s, background .2s, color .2s; }
     .social-btn:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
-    .cv-list { list-style: none; display: grid; gap: .6rem; }
-    .cv-list li { display: grid; grid-template-columns: 110px 1fr; gap: .75rem; font-size: .9rem; padding-bottom: .6rem; border-bottom: 1px solid var(--rule); }
-    .cv-list li:last-child { border-bottom: none; }
-    .cv-list .cv-years { color: var(--accent); font-weight: 600; font-size: .8rem; padding-top: 2px; }
-    .cv-list .cv-role { color: var(--ink); }
-    .cv-list .cv-org { color: var(--muted); font-size: .85rem; }
 
     /* FOOTER */
     footer { background: var(--navy); color: rgba(255,255,255,.5); text-align: center; padding: 1.5rem; font-size: .8rem; }
@@ -148,8 +144,7 @@
       .hero-photo { order: -1; }
       .hero-links, .tags { justify-content: center; }
       .hero-text p { margin-left: auto; margin-right: auto; }
-      .contact-grid, .media-grid { grid-template-columns: 1fr; }
-      .cv-list li { grid-template-columns: 1fr; gap: .15rem; }
+      .media-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--navy); padding: .5rem 0; box-shadow: 0 4px 8px rgba(0,0,0,.3); }
       .nav-links.open { display: flex; }
       .nav-links a { height: auto; padding: .8rem 2rem; border-bottom: none; border-left: 3px solid transparent; }
@@ -212,6 +207,12 @@
     <div class="pub-list">
       <div class="paper-card">
         <span class="pub-type article">Journal article</span>
+        <h3>La inteligencia artificial generativa en la investigación criminológica cuantitativa</h3>
+        <div class="journal"><em>InDret: Revista para el Análisis del Derecho</em></div>
+        <a href="https://indret.com/la-inteligencia-artificial-generativa-en-la-investigacion-criminologica-cuantitativa/" target="_blank" class="paper-link">→ View paper</a>
+      </div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
         <h3>Managing Cybersecurity in the Water Sector: When the Human Factor Does Matter</h3>
         <div class="journal"><em>Journal of Water Resources Planning and Management</em>, 152(5), 05026009 (with Laura Arantegui &amp; Ignasi Rodriguez-Roda)</div>
         <a href="https://doi.org/10.1061/JWRMD5.WRENG-7075" target="_blank" class="paper-link">→ View paper</a>
@@ -234,12 +235,12 @@
         <div class="journal"><em>Journal of Criminology</em>, 58(3) (with Esther Sitges Maciá &amp; Nieves Erades-Pérez)</div>
         <a href="https://doi.org/10.1177/26338076241293144" target="_blank" class="paper-link">→ View paper</a>
       </div>
-<div class="paper-card">
-  <span class="pub-type article">Journal article</span>
-  <h3>El misterioso caso de las cifras oficiales sobre condenas por delitos sexuales graves</h3>
-  <div class="journal"><em>Revista Española de Investigación Criminológica</em>, 23(1) (with Daniel Varona &amp; Jose M. López-Riba)</div>
-  <a href="https://reic.criminologia.net/index.php/journal/article/view/1019" target="_blank" class="paper-link">→ View paper</a>
-</div>
+      <div class="paper-card">
+        <span class="pub-type article">Journal article</span>
+        <h3>El misterioso caso de las cifras oficiales sobre condenas por delitos sexuales graves</h3>
+        <div class="journal"><em>Revista Española de Investigación Criminológica</em>, 23(1) (with Daniel Varona &amp; Jose M. López-Riba)</div>
+        <a href="https://reic.criminologia.net/index.php/journal/article/view/1019" target="_blank" class="paper-link">→ View paper</a>
+      </div>
       <div class="paper-card">
         <span class="pub-type editorial">Editorial</span>
         <h3>Editorial: Número especial TIC y criminalidad</h3>
@@ -416,44 +417,27 @@
 <!-- CONTACT -->
 <section id="contact">
   <h2 class="section-label">Contact</h2>
-  <div class="contact-grid">
-    <div class="contact-block">
-      <p>Feel free to get in touch regarding research collaborations, media enquiries, or dissertation supervision.</p>
-      <div class="contact-item">
-        <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-        <div>
-          <div class="label">Email</div>
-          <div class="value">steven.kemp [at] udg.edu</div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
-        <div>
-          <div class="label">Address</div>
-          <div class="value">Departament de Dret Públic<br>C/ de la Universitat de Girona, 12<br>17003 Girona, Spain</div>
-        </div>
-      </div>
-      <div class="social-row">
-        <a href="https://scholar.google.com/citations?user=uT_G5foAAAAJ" target="_blank" class="social-btn">Google Scholar</a>
-        <a href="https://orcid.org/0000-0001-8662-1913" target="_blank" class="social-btn">ORCID</a>
-        <a href="https://www.researchgate.net/profile/Steven-Kemp" target="_blank" class="social-btn">ResearchGate</a>
-        <a href="https://www.linkedin.com/in/steven-kemp-ed/" target="_blank" class="social-btn">LinkedIn</a>
+  <div class="contact-block">
+    <p>Feel free to get in touch regarding research collaborations, media enquiries, or dissertation supervision.</p>
+    <div class="contact-item">
+      <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+      <div>
+        <div class="label">Email</div>
+        <div class="value">steven.kemp [at] udg.edu</div>
       </div>
     </div>
-
-    <div class="contact-block">
-      <p style="font-weight:600;color:var(--navy);margin-bottom:.75rem;">Academic positions</p>
-      <ul class="cv-list">
-        <li><span class="cv-years">2025–present</span><div><div class="cv-role">Serra Hunter Associate Professor</div><div class="cv-org">Universitat de Girona</div></div></li>
-        <li><span class="cv-years">2024–present</span><div><div class="cv-role">Consultant Lecturer — Economy of Cybercrime</div><div class="cv-org">UNICRI (United Nations)</div></div></li>
-        <li><span class="cv-years">2018–present</span><div><div class="cv-role">Consultant Lecturer</div><div class="cv-org">Universitat Oberta de Catalunya (UOC)</div></div></li>
-        <li><span class="cv-years">2023–2025</span><div><div class="cv-role">Serra Hunter Lecturer</div><div class="cv-org">Universitat de Girona</div></div></li>
-        <li><span class="cv-years">2021–2023</span><div><div class="cv-role">Postdoctoral Researcher (Juan de la Cierva)</div><div class="cv-org">Universitat Pompeu Fabra</div></div></li>
-        <li><span class="cv-years">2021</span><div><div class="cv-role">Postdoctoral Researcher</div><div class="cv-org">University of Manchester</div></div></li>
-        <li><span class="cv-years">2020–2021</span><div><div class="cv-role">Assistant Lecturer</div><div class="cv-org">Universidad Miguel Hernández de Elche</div></div></li>
-        <li><span class="cv-years">2018–2025</span><div><div class="cv-role">Police Officer Trainer</div><div class="cv-org">Catalan Institute for Public Security (ISPC)</div></div></li>
-        <li><span class="cv-years">2015–2021</span><div><div class="cv-role">Assistant Lecturer</div><div class="cv-org">Universitat de Girona</div></div></li>
-      </ul>
+    <div class="contact-item">
+      <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+      <div>
+        <div class="label">Address</div>
+        <div class="value">Departament de Dret Públic<br>C/ de la Universitat de Girona, 12<br>17003 Girona, Spain</div>
+      </div>
+    </div>
+    <div class="social-row">
+      <a href="https://scholar.google.com/citations?user=uT_G5foAAAAJ" target="_blank" class="social-btn">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8662-1913" target="_blank" class="social-btn">ORCID</a>
+      <a href="https://www.researchgate.net/profile/Steven-Kemp" target="_blank" class="social-btn">ResearchGate</a>
+      <a href="https://www.linkedin.com/in/steven-kemp-ed/" target="_blank" class="social-btn">LinkedIn</a>
     </div>
   </div>
 </section>
